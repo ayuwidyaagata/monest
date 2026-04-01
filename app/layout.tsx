@@ -1,6 +1,9 @@
 import type { Metadata } from "next";
-import { IBM_Plex_Serif, Inter } from "next/font/google";
+import { IBM_Plex_Serif, Inter, Geist } from "next/font/google";
 import "./globals.css";
+import { cn } from "@/lib/utils";
+
+const geist = Geist({subsets:['latin'],variable:'--font-sans'});
 
 const inter = Inter({ subsets: ["latin"], variable: "--font-inter"});
 const ibmPlexSerif = IBM_Plex_Serif({
@@ -25,7 +28,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${inter.variable} ${ibmPlexSerif.variable} h-full antialiased`}
+      className={cn("h-full", "antialiased", inter.variable, ibmPlexSerif.variable, "font-sans", geist.variable)}
     >
       <body className="min-h-full flex flex-col">{children}</body>
     </html>
