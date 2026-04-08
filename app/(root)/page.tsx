@@ -1,4 +1,5 @@
 import HeaderBox from "@/components/HeaderBox"
+import RecentTransactions from "@/components/RecentTransactions"
 import RightSidebar from "@/components/RightSidebar"
 import TotalBalanceBox from "@/components/TotalBalanceBox"
 import { getAccount, getAccounts } from "@/lib/actions/bank.actions"
@@ -7,7 +8,7 @@ import { getLoggedInUser } from "@/lib/actions/user.actions"
 export const dynamic = "force-dynamic";
 
 const Home = async ({ searchParams: { id, page }}: SearchParamProps) => {
-  // const currentPage = Number(page as string) || 1;
+  const currentPage = Number(page as string) || 1;
   const loggedIn = await getLoggedInUser();
   const accounts = await getAccounts({
     userId: loggedIn.$id
@@ -17,7 +18,7 @@ const Home = async ({ searchParams: { id, page }}: SearchParamProps) => {
 
   const appwriteItemId = (id as string) || accounts?.data[0]?.appwriteItemId;
 
-  // const account = await getAccount({ appwriteItemId });
+  const account = await getAccount({ appwriteItemId });
 
   return (
     <section className="home">
@@ -37,12 +38,12 @@ const Home = async ({ searchParams: { id, page }}: SearchParamProps) => {
           />
         </header>
 
-        {/* <RecentTransactions 
+        <RecentTransactions
           accounts={accounts?.data}
           transactions={account?.transactions}
           appwriteItemId={appwriteItemId}
           page={currentPage}
-        /> */}
+        />
       </div>
 
       <RightSidebar
